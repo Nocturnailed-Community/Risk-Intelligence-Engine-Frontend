@@ -1,0 +1,49 @@
+body.dark {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark .bg-light {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark .bg-white {
+  background-color: #2a2a2a !important;
+  color: #ddd;
+}
+
+body.dark .border {
+  border-color: #444 !important;
+}
+
+body.dark .form-control {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+body.dark .btn-primary {
+  background-color: #3f51b5;
+  border-color: #3f51b5;
+}
+
+body.dark .bg-success.bg-opacity-25 {
+  background-color: rgba(76, 175, 80, 0.15) !important;
+}
+/* Tambahan agar navbar ikut gelap */
+body.dark .navbar {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border-bottom: 1px solid #444;
+}
+
+body.dark .navbar-brand,
+body.dark .nav-link {
+  color: #e0e0e0 !important;
+}
+
+body.dark .navbar-toggler {
+  filter: invert(100%);
+}
+
