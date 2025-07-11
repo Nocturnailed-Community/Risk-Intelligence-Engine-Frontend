@@ -1,6 +1,6 @@
 <template>
-  <div class="container d-flex justify-content-center align-items-center">
-    <div class="card p-4 shadow" style="margin-top: 8%">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow">
       <div class="text-center">
         <img
           v-if="isDarkMode === true"
@@ -18,7 +18,7 @@
         />
       </div>
       <div class="mb-2 text-center">
-        <h3>Hai,selamat datang kembali</h3>
+        <h4>Hai,selamat datang kembali</h4>
         <p>
           <label class="me-1">Belum punya Akun? </label
           ><NuxtLink to="/register/">Daftar disini</NuxtLink>
@@ -83,7 +83,7 @@ import { useAuthStore } from "~/stores/authStore";
 import Swal from "sweetalert2";
 
 definePageMeta({
-  layout: "login-sid",
+  layout: "login",
   middleware: ["is-guest"],
 });
 

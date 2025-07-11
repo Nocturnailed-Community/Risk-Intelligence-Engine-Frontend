@@ -43,10 +43,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-// definePageMeta({
-//   layout: "sid",
-//   middleware: ["is-auth-dosen"],
-// });
+definePageMeta({
+  layout: "default",
+  middleware: ["is-auth"],
+});
 
 const isDarkMode = ref(false);
 

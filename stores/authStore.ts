@@ -1,18 +1,27 @@
-import { defineStore } from 'pinia';
-import { useCookie } from '#app'; // Pastikan ini diimport jika belum
+import { defineStore } from "pinia";
+import { useCookie } from "#app"; // Pastikan ini diimport jika belum
 
 interface User {
-    id?: number;
-  username: string;
-  crypt_username: string;
-  name: string;
-  email: string;
-  role: string;
-  group: number;
-  token: string;
-};
+  user: UserData;
+  access_token: string;
+  token_type: string;
+}
 
-export const useAuthStore = defineStore('auth', {
+interface UserData {
+  user_image: null;
+  user_name: string;
+  user_username: string;
+  user_email: string;
+  user_status: number;
+  group_id: number;
+  user_portofolio: string;
+  user_phone_number: string;
+  user_country: string;
+  is_email_verified: number;
+  email_verified_at: string;
+}
+
+export const useAuthStore = defineStore("auth", {
   state: () => ({
     user: null as User | null,
   }),
@@ -24,38 +33,22 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(user: User) {
       this.user = user;
-      console.log("User", user)
-
-      const crypt = useCookie('2492117');
-      console.log("Crypt", crypt)
-      crypt.value = JSON.stringify(user.crypt_username);
-
-      const token = useCookie('712162213');
-      token.value = JSON.stringify(user.token);
-
-      const role = useCookie('9121522');
-      role.value = JSON.stringify(user.role);
       
-      const name = useCookie("11011001");
-      name.value = JSON.stringify(user.name);
+      const name = useCookie("222222");
+      name.value = JSON.stringify(user.user.user_name);
+
+      const token = useCookie("111111");
+      token.value = JSON.stringify(user.access_token);
     },
 
     async logout() {
-      console.log('Logout action called'); // Debug log
-
       this.user = null;
 
-      const crypt = useCookie('2492117');
-      crypt.value = null;
+      const user = useCookie("222222");
+      user.value = null;
 
-      const token = useCookie('712162213');
+      const token = useCookie("111111");
       token.value = null;
-
-      const role = useCookie('9121522');
-      role.value = null;
-
-      const name = useCookie("11011001");
-      name.value = null;
     },
   },
 });

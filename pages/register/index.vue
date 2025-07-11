@@ -13,7 +13,7 @@ import { defineComponent, ref } from "vue";
 import FormUserRegister from "~/components/registerComponent/formUserRegister.vue";
 
 definePageMeta({
-  layout: "login-sid",
+  layout: "login",
   middleware: ["is-guest"],
 });
 
