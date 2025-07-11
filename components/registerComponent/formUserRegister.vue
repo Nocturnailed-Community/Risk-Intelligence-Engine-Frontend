@@ -1,101 +1,98 @@
 <template>
-  <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card p-4 shadow">
-      <div class="row">
-        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center" style="border-top: 2cap">
-          <div class="text-center">
-            <img v-if="isDarkMode === true" src="@/assets/images/white.png" alt="Risk Intelligence Engine"
-              class="mb-4 size-img" />
-            <img v-else src="@/assets/images/black.png" alt="Risk Intelligence Engine" class="mb-4 size-img" />
+  <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light px-3">
+    <div class="row shadow-lg rounded-4 overflow-hidden bg-white" style="max-width: 1000px; width: 100%;">
+      <!-- Kolom Kiri: Gambar -->
+      <div class="col-md-6 d-flex justify-content-center align-items-center bg-dark py-5">
+        <img
+          src="@/assets/images/white.png"
+          alt="Risk Intelligence Engine"
+          class="mb-4"
+          style="width: 20rem"
+        />
+      </div>
+
+      <!-- Kolom Kanan: Formulir -->
+      <div class="col-md-6 p-4">
+        <h3 class="fw-bold mb-3 text-center">Buat Akun Baru</h3>
+
+        <div class="row g-2">
+          <div class="col-md-6">
+            <label for="usernameInput" class="form-label">Username</label>
+            <input type="text" class="form-control" id="usernameInput" v-model="newuser_username" required />
           </div>
-        </div>
 
-        <div class="col-12 col-md-6">
-          <h4 class="fw-bold">Buat Akun Baru</h4>
-          <form>
-            <div class="mb-3">
-              <label for="usernameInput" class="form-label">Username</label>
-              <input type="text" class="form-control" id="usernameInput" v-model="newuser_username" required />
-            </div>
-            <div class="mb-3">
-              <label for="nameinput" class="form-label">Nama Lenkap</label>
-              <input type="text" class="form-control" id="nameinput" v-model="newuser_name" required />
-            </div>
-            <div class="mb-3">
-              <label for="emailinput" class="form-label">Email</label>
-              <input type="text" class="form-control" id="emailinput" v-model="newuser_email" required />
-            </div>
-            <div class="mb-3">
-              <label>Password :</label>
-              <div class="position-relative">
-                <input :type="newPasswordFieldType" class="form-control" id="newPassword" placeholder="*****"
-                  v-model="newpassword" required />
-                <span class="position-absolute end-0 top-50 translate-middle-y me-3"
-                  @click="toggleNewPasswordVisibility" style="cursor: pointer">
-                  <i :class="newPasswordFieldType === 'password'
-                    ? 'bi bi-eye'
-                    : 'bi bi-eye-slash'
-                    "></i>
-                </span>
-              </div>
-            </div>
-            <div class="mb-3">
-              <label>Konfirmasi Password Baru :</label>
-              <div class="position-relative">
-                <input :type="confirmPasswordFieldType" class="form-control" id="validationPassword" placeholder="*****"
-                  v-model="newconfirm_password" required />
-                <span class="position-absolute end-0 top-50 translate-middle-y me-3"
-                  @click="toggleValidationPasswordVisibility" style="cursor: pointer">
-                  <i :class="confirmPasswordFieldType === 'password'
-                    ? 'bi bi-eye'
-                    : 'bi bi-eye-slash'
-                    "></i>
-                </span>
-              </div>
-            </div>
+          <div class="col-md-6">
+            <label for="nameinput" class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" id="nameinput" v-model="newuser_name" required />
+          </div>
 
-            <div class="mb-3">
-              <ul class="small mb-3 list-unstyled">
-                <li :class="validClass(minChar)" class="d-flex align-items-center mb-1">
-                  <i :class="iconClass(minChar)" class="me-2"></i>
-                  Minimal 8 karakter
-                </li>
-                <li :class="validClass(upper)" class="d-flex align-items-center mb-1">
-                  <i :class="iconClass(upper)" class="me-2"></i>
-                  Minimal 1 huruf kapital
-                </li>
-                <li :class="validClass(lower)" class="d-flex align-items-center mb-1">
-                  <i :class="iconClass(lower)" class="me-2"></i>
-                  Minimal 1 huruf kecil
-                </li>
-                <li :class="validClass(number)" class="d-flex align-items-center mb-1">
-                  <i :class="iconClass(number)" class="me-2"></i>
-                  Minimal 1 angka
-                </li>
-                <li :class="validClass(special)" class="d-flex align-items-center mb-1">
-                  <i :class="iconClass(special)" class="me-2"></i>
-                  Minimal 1 karakter spesial
-                </li>
-                <li :class="validClass(match)" class="d-flex align-items-center mb-1">
-                  <i :class="iconClass(match)" class="me-2"></i>
-                  Konfirmasi password harus sama dengan password baru
-                </li>
-              </ul>
+          <div class="col-md-12">
+            <label for="emailinput" class="form-label">Email</label>
+            <input type="email" class="form-control" id="emailinput" v-model="newuser_email" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="newPassword" class="form-label">Password</label>
+            <div class="position-relative">
+              <input :type="newPasswordFieldType" class="form-control" id="newPassword" v-model="newpassword" required />
+              <span class="position-absolute end-0 top-50 translate-middle-y me-3" @click="toggleNewPasswordVisibility" style="cursor: pointer;">
+                <i :class="newPasswordFieldType === 'password' ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+              </span>
             </div>
-            <button :disabled="false" @click="addUserRegister" class="btn btn-success mb-2" style="width: 100%">
-              <span>Daftar</span>
+          </div>
+
+          <div class="col-md-6">
+            <label for="validationPassword" class="form-label">Konfirmasi Password</label>
+            <div class="position-relative">
+              <input :type="confirmPasswordFieldType" class="form-control" id="validationPassword" v-model="newconfirm_password" required />
+              <span class="position-absolute end-0 top-50 translate-middle-y me-3" @click="toggleValidationPasswordVisibility" style="cursor: pointer;">
+                <i :class="confirmPasswordFieldType === 'password' ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Password Rules -->
+          <div class="col-md-12">
+            <ul class="small mb-3 list-unstyled mt-2">
+              <li :class="validClass(minChar)" class="d-flex align-items-center mb-1">
+                <i :class="iconClass(minChar)" class="me-2"></i> Minimal 8 karakter
+              </li>
+              <li :class="validClass(upper)" class="d-flex align-items-center mb-1">
+                <i :class="iconClass(upper)" class="me-2"></i> Minimal 1 huruf kapital
+              </li>
+              <li :class="validClass(lower)" class="d-flex align-items-center mb-1">
+                <i :class="iconClass(lower)" class="me-2"></i> Minimal 1 huruf kecil
+              </li>
+              <li :class="validClass(number)" class="d-flex align-items-center mb-1">
+                <i :class="iconClass(number)" class="me-2"></i> Minimal 1 angka
+              </li>
+              <li :class="validClass(special)" class="d-flex align-items-center mb-1">
+                <i :class="iconClass(special)" class="me-2"></i> Minimal 1 karakter spesial
+              </li>
+              <li :class="validClass(match)" class="d-flex align-items-center mb-1">
+                <i :class="iconClass(match)" class="me-2"></i> Password dan konfirmasi harus cocok
+              </li>
+            </ul>
+          </div>
+
+          <!-- Tombol -->
+          <div class="col-12">
+            <button class="btn btn-success w-100" @click="addUserRegister">
+              Daftar
             </button>
+          </div>
 
-            <div class="text-center">
-              <NuxtLink to="/login/"><i class="bi bi-arrow-left"></i> Kembali ke Halaman
-                Login</NuxtLink>
-            </div>
-          </form>
+          <div class="text-center mt-2">
+          <p class="text-muted small">
+          <NuxtLink to="/login/" class="text-decoration-none fw-semibold">Kembali ke Login</NuxtLink>
+        </p>  
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script lang="ts">
 import Swal from "sweetalert2";
@@ -297,4 +294,18 @@ export default defineComponent({
     width: 10rem;
   }
 }
+/* Untuk membuat gambar tidak terlalu besar di sisi kiri */
+.size-img {
+  max-width: 100%;
+  max-height: 300px;
+}
+
+/* Contoh validClass dan iconClass, jika kamu belum punya */
+.valid {
+  color: green;
+}
+.invalid {
+  color: red;
+}
+
 </style>
