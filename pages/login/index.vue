@@ -1,81 +1,73 @@
 <template>
-  <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card p-4 shadow">
-      <div class="text-center">
+  <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center bg-gradient bg-light px-3">
+    <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 400px;">
+      <!-- Logo -->
+      <div class="text-center mb-4">
         <img
-          v-if="isDarkMode === true"
-          src="@/assets/images/white.png"
-          alt="Risk Intelligence Engine"
-          class="mb-4"
-          style="width: 10rem"
-        />
-        <img
-          v-else
           src="@/assets/images/black.png"
           alt="Risk Intelligence Engine"
           class="mb-4"
-          style="width: 10rem"
+          style="width: 8rem"
         />
       </div>
-      <div class="mb-2 text-center">
-        <h4>Hai,selamat datang kembali</h4>
-        <p>
-          <label class="me-1">Belum punya Akun? </label
-          ><NuxtLink to="/register/">Daftar disini</NuxtLink>
+
+      <!-- Judul dan Daftar -->
+      <div class="text-center mb-3">
+        <h4 class="fw-bold">Hai, Selamat Datang Kembali</h4>
+        <p class="text-muted small">
+          Belum punya akun?
+          <NuxtLink to="/register/" class="text-decoration-none fw-semibold">Daftar disini</NuxtLink>
         </p>
       </div>
+
+      <!-- Form Login -->
       <form @submit.prevent="login">
         <div class="mb-3">
           <input
             type="text"
-            class="form-control"
-            placeholder="Masukan Username"
-            id="usernameInput"
+            class="form-control form-control-lg"
+            placeholder="Masukkan Username"
             v-model="username"
+            id="usernameInput"
             required
           />
         </div>
-        <div class="mb-2">
-          <div class="position-relative">
-            <input
-              :type="passwordFieldType"
-              class="form-control"
-              placeholder="Masukan Password"
-              id="password"
-              v-model="password"
-              required
-            />
-            <span
-              class="position-absolute end-0 top-50 translate-middle-y me-3"
-              @click="togglePasswordVisibility"
-              style="cursor: pointer"
-            >
-              <i
-                :class="
-                  passwordFieldType === 'password'
-                    ? 'bi bi-eye'
-                    : 'bi bi-eye-slash'
-                "
-              ></i>
-            </span>
-          </div>
+
+        <div class="mb-3 position-relative">
+          <input
+            :type="passwordFieldType"
+            class="form-control form-control-lg"
+            placeholder="Masukkan Password"
+            v-model="password"
+            id="password"
+            required
+          />
+          <span
+            class="position-absolute top-50 end-0 translate-middle-y me-3"
+            style="cursor: pointer"
+            @click="togglePasswordVisibility"
+          >
+            <i :class="passwordFieldType === 'password' ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+          </span>
         </div>
-        <button type="submit" class="btn btn-success" :disabled="isLoading">
-          <span v-if="isLoading" class="spinner"></span>
-          <span v-else>Login</span>
-        </button>
-        <div class="text-end mt-2">
-          <NuxtLink to="#">Lupa Password?</NuxtLink>
+
+        <!-- Tombol Login -->
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-success btn-lg" :disabled="isLoading">
+            <span v-if="isLoading" class="spinner-border spinner-border-sm"></span>
+            <span v-else>Login</span>
+          </button>
+        </div>
+
+        <!-- Lupa Password -->
+        <div class="text-end">
+          <NuxtLink to="#" class="small text-decoration-none">Lupa Password?</NuxtLink>
         </div>
       </form>
-      <div class="row mt-4">
-        <div class="col-12 text-start align-middle">
-          
-        </div>
-      </div>
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref } from "vue";
 import { login as loginService } from "~/services/authService";
@@ -214,4 +206,8 @@ const toggleDarkMode = () => {
     margin-left: 15px !important;
   }
 }
+.bg-gradient {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
 </style>
