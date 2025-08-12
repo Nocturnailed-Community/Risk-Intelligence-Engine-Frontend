@@ -33,6 +33,7 @@
   <div class="d-flex flex-column flex-md-row gap-2 p-4">
     <input type="text" class="form-control" placeholder="Enter text for analysis..." />
   </div>
+  <NuxtLink to="/cek" class="btn btn-primary">Cek</NuxtLink>
 </template>
 
 <script lang="ts">
@@ -40,6 +41,12 @@ import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
 import { useAuthStore } from "~/stores/authStore"
 import Swal from "sweetalert2"
+
+definePageMeta({
+  middleware: "is-auth", // this should match the name of the file inside the middleware directory
+  layout: "default"
+});
+
 
 export default defineComponent({
   name: "dashboard",
@@ -163,8 +170,8 @@ export default defineComponent({
 
     // ✅ Inisialisasi saat komponen dimount
     onMounted(async () => {
-      setupAutoDeleteIndexedDB()
-      await cek()
+      // setupAutoDeleteIndexedDB()
+      // await cek()
     })
 
     return {

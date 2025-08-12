@@ -104,45 +104,17 @@ export default defineComponent({
         isAuthenticated.value = true
       } catch (error) {
         console.error("❌ Gagal ambil token:", error)
-        router.replace("/login")
+        router.replace("/")
       } finally {
         isLoading.value = false
       }
     }
 
-    const logout = () => {
-      authStore.logout()
-      router.replace("/login")
-    }
-
-    const confirmLogout = () => {
-      Swal.fire({
-        title: "Apakah Anda yakin?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, keluar!",
-        cancelButtonText: "Batal",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          logout()
-        }
-      })
-    }
-
     // ✅ Inisialisasi saat komponen dimount
     onMounted(async () => {
-      setupAutoDeleteIndexedDB()
-      await cek()
+      // setupAutoDeleteIndexedDB()
+      // await cek()
     })
-
-    return {
-      isLoading,
-      isAuthenticated,
-      token,
-      confirmLogout,
-    }
   },
 })
 </script>

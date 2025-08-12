@@ -60,15 +60,15 @@ export async function deleteIndexedDB(): Promise<void> {
   const request = indexedDB.deleteDatabase("myAuthDB")
 
   request.onsuccess = () => {
-    console.log("🗑️ IndexedDB 'myAuthDB' berhasil dihapus.")
+    console.log("IndexedDB 'myAuthDB' berhasil dihapus.")
   }
 
   request.onerror = () => {
-    console.error("❌ Gagal menghapus IndexedDB 'myAuthDB':", request.error)
+    console.error("Gagal menghapus IndexedDB 'myAuthDB':", request.error)
   }
 
   request.onblocked = () => {
-    console.warn("⚠️ Penghapusan IndexedDB diblokir. Tutup tab lain yang masih memakai DB ini.")
+    console.warn("Penghapusan IndexedDB diblokir. Tutup tab lain yang masih memakai DB ini.")
   }
 };
 
